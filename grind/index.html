@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16 Недель План</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>16 Недель</h2>
+                <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" data-page="dashboard" class="nav-link active">Dashboard</a></li>
+                <li><a href="#" data-page="plan" class="nav-link">План 16 недель</a></li>
+                <li><a href="#" data-page="notes" class="nav-link">Notes</a></li>
+                <li><a href="#" data-page="pomodoro" class="nav-link">Pomodoro</a></li>
+                <li><a href="#" data-page="training" class="nav-link">Training Log</a></li>
+                <li><a href="#" data-page="cf-tracker" class="nav-link">CF-tracker</a></li>
+                <li><a href="#" data-page="export" class="nav-link">Экспорт/Импорт</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p class="privacy-note">🔒 Все данные хранятся локально в вашем браузере</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="page-dashboard" class="page active">
+                <h1>Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>📅 Прогресс</h3>
+                        <p>Неделя: <span id="currentWeek">1</span> из 16</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>📝 Заметки</h3>
+                        <p>Всего: <span id="notesCount">0</span></p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🍅 Pomodoro</h3>
+                        <p>Сессий: <span id="pomodoroCount">0</span></p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>💪 Тренировки</h3>
+                        <p>Записей: <span id="trainingCount">0</span></p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🎯 CF Задачи</h3>
+                        <p>Решено: <span id="cfCount">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Page -->
+            <div id="page-plan" class="page">
+                <h1>План 16 недель</h1>
+                <div class="plan-notice">
+                    ⚠️ <strong>План только для чтения</strong> — изменения не сохраняются. Это базовая структура для вашего развития.
+                </div>
+                <div id="planContainer" class="plan-container"></div>
+            </div>
+
+            <!-- Notes Page -->
+            <div id="page-notes" class="page">
+                <h1>Notes</h1>
+                <div class="notes-section">
+                    <div class="note-form">
+                        <input type="text" id="noteTitle" placeholder="Заголовок заметки">
+                        <textarea id="noteContent" placeholder="Содержание заметки"></textarea>
+                        <button id="addNoteBtn" class="btn btn-primary">Добавить заметку</button>
+                    </div>
+                    <div id="notesList" class="notes-list"></div>
+                </div>
+            </div>
+
+            <!-- Pomodoro Page -->
+            <div id="page-pomodoro" class="page">
+                <h1>Pomodoro Timer</h1>
+                <div class="pomodoro-section">
+                    <div class="pomodoro-timer">
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-controls">
+                            <button id="startBtn" class="btn btn-primary">Start</button>
+                            <button id="pauseBtn" class="btn btn-secondary">Pause</button>
+                            <button id="resetBtn" class="btn btn-secondary">Reset</button>
+                        </div>
+                        <div class="timer-settings">
+                            <label>
+                                Работа (мин):
+                                <input type="number" id="workDuration" value="25" min="1" max="60">
+                            </label>
+                            <label>
+                                Перерыв (мин):
+                                <input type="number" id="breakDuration" value="5" min="1" max="30">
+                            </label>
+                        </div>
+                        <div class="session-note">
+                            <input type="text" id="sessionNote" placeholder="Заметка к сессии (опционально)">
+                        </div>
+                    </div>
+                    <div class="pomodoro-history">
+                        <h3>История сессий</h3>
+                        <div id="pomodoroHistory"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Log Page -->
+            <div id="page-training" class="page">
+                <h1>Training Log</h1>
+                <div class="training-section">
+                    <div class="training-form">
+                        <input type="date" id="trainingDate">
+                        <select id="trainingType">
+                            <option value="A">Тренировка A</option>
+                            <option value="B">Тренировка B</option>
+                            <option value="C">Тренировка C</option>
+                        </select>
+                        <textarea id="trainingNotes" placeholder="Упражнения, повторы, самочувствие..."></textarea>
+                        <button id="addTrainingBtn" class="btn btn-primary">Добавить запись</button>
+                    </div>
+                    <div id="trainingList" class="training-list"></div>
+                </div>
+            </div>
+
+            <!-- CF Tracker Page -->
+            <div id="page-cf-tracker" class="page">
+                <h1>CF-tracker</h1>
+                <div class="cf-section">
+                    <div class="cf-form">
+                        <input type="date" id="cfDate">
+                        <input type="text" id="cfProblem" placeholder="Номер задачи (например, 800A)">
+                        <select id="cfDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <select id="cfStatus">
+                            <option value="solved">Решена</option>
+                            <option value="attempted">Попытка</option>
+                            <option value="reviewed">Разбор</option>
+                        </select>
+                        <textarea id="cfNotes" placeholder="Заметки, подход к решению..."></textarea>
+                        <button id="addCfBtn" class="btn btn-primary">Добавить задачу</button>
+                    </div>
+                    <div id="cfList" class="cf-list"></div>
+                </div>
+            </div>
+
+            <!-- Export/Import Page -->
+            <div id="page-export" class="page">
+                <h1>Экспорт/Импорт данных</h1>
+                <div class="export-section">
+                    <div class="export-info">
+                        <p>📦 Экспортируйте свои личные данные (заметки, тренировки, CF-задачи, историю Pomodoro) в JSON файл.</p>
+                        <p>📥 Импортируйте ранее сохранённые данные для восстановления.</p>
+                        <p class="warning">⚠️ План 16 недель не экспортируется — он всегда доступен в приложении.</p>
+                    </div>
+                    <div class="export-buttons">
+                        <button id="exportBtn" class="btn btn-primary">📤 Экспорт JSON</button>
+                        <button id="importBtn" class="btn btn-secondary">📥 Импорт JSON</button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
